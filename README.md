@@ -39,27 +39,27 @@ export class MiComponente {}
 Calendario - Vista Mes
 Calendario Mes
 
-![alt text]([/docs/screenshots/calendar-month.png](https://github.com/Kevin-Steven/ng-clinical-ui/blob/773e0645b0e2227fec6158fbaf0ef8536f135d09/calendar-day.png))
+![image alt]([/docs/screenshots/calendar-month.png](https://github.com/Kevin-Steven/ng-clinical-ui/blob/773e0645b0e2227fec6158fbaf0ef8536f135d09/calendar-day.png))
 
 Calendario - Vista Semana
 Calendario Semana
 
-![alt text](/docs/screenshots/calendar-week.png)
+![image alt](/docs/screenshots/calendar-week.png)
 
 Calendario - Vista Día
 Calendario Día
 
-![alt text](/docs/screenshots/calendar-day.png)
+![image alt](/docs/screenshots/calendar-day.png)
 
 DatePicker
 DatePicker
 
-![alt text](/docs/screenshots/datepicker.png)
+![image alt](/docs/screenshots/datepicker.png)
 
 DateRangePicker
 DateRangePicker
 
-![alt text](/docs/screenshots/daterange-picker.png)
+![image alt](/docs/screenshots/daterange-picker.png)
 
 🎨 Características
 ⚡ Angular 21 Signals
