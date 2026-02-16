@@ -1,59 +1,95 @@
-# Calendar
+# 🏥 ng-med-ui
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.2.
+> Componentes Angular para sistemas de salud en Ecuador
 
-## Development server
+[![Angular](https://img.shields.io/badge/Angular-21-red.svg)](https://angular.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8.svg)](https://tailwindcss.com/)
 
-To start a local development server, run:
+Componentes UI modernos para agendamiento de citas y gestión clínica. Conformes con normativas MSP/ACESS de Ecuador.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ✨ Componentes
 
-## Code scaffolding
+- 📅 Calendario (Mes, Semana, Día)
+- 🗓️ DatePicker
+- 📆 DateRangePicker
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Instalación
 
 ```bash
-ng generate --help
-```
+npm install ng-med-ui
+🚀 Uso
+typescript
+import { CalendarMonth, UiDatePicker, UiDateRangePicker } from 'ng-med-ui';
 
-## Building
+@Component({
+  imports: [CalendarMonth, UiDatePicker, UiDateRangePicker],
+  template: `
+    <calendar-month [events]="citas()" />
+    <ui-datepicker [formControl]="fecha" />
+    <ui-daterange-picker [formControl]="rango" />
+  `
+})
+export class MiComponente {}
+📸 Screenshots
+Calendario - Vista Mes
+Calendario Mes
 
-To build the project run:
+![alt text](image.png)
 
-```bash
-ng build
-```
+Calendario - Vista Semana
+Calendario Semana
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+![alt text](image-1.png)
 
-## Running unit tests
+Calendario - Vista Día
+Calendario Día
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+![alt text](image-2.png)
 
-```bash
-ng test
-```
+DatePicker
+DatePicker
 
-## Running end-to-end tests
+![alt text](image-3.png)
 
-For end-to-end (e2e) testing, run:
+DateRangePicker
+DateRangePicker
 
-```bash
-ng e2e
-```
+![alt text](image-4.png)
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+🎨 Características
+⚡ Angular 21 Signals
 
-## Additional Resources
+🌙 Dark mode incluido
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+♿ Accesible (WCAG 2.1)
+
+🎨 Personalizable con Tailwind
+
+📱 Responsive
+
+🏥 Normativa Ecuador
+Compatible con:
+
+Historia Clínica Única (HCU)
+
+Estándares ACESS
+
+📄 Licencia
+MIT © kevin_barzola
+
+🔗 Links
+Documentación
+
+Reportar bug
+
+⭐ Dale una estrella si te sirvió
+
+text
+
+***
+
