@@ -39,7 +39,7 @@ export class MiComponente {}
 Calendario - Vista Mes
 Calendario Mes
 
-![image alt]([/docs/screenshots/calendar-month.png](https://github.com/Kevin-Steven/ng-clinical-ui/blob/773e0645b0e2227fec6158fbaf0ef8536f135d09/calendar-day.png))
+![image alt](https://github.com/Kevin-Steven/ng-clinical-ui/blob/773e0645b0e2227fec6158fbaf0ef8536f135d09/calendar-day.png))
 
 Calendario - Vista Semana
 Calendario Semana
