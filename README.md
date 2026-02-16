@@ -59,7 +59,7 @@ DatePicker
 DateRangePicker
 DateRangePicker
 
-![alt text](./docs/screenshots/daterange-picker.png)
+![image alt](docs/screenshots/daterange-picker.png)
 
 🎨 Características
 ⚡ Angular 21 Signals
