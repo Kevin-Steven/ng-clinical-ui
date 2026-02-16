@@ -39,27 +39,27 @@ export class MiComponente {}
 Calendario - Vista Mes
 Calendario Mes
 
-![alt text](image.png)
+![alt text](/docs/screenshots/calendar-month.png)
 
 Calendario - Vista Semana
 Calendario Semana
 
-![alt text](image-1.png)
+![alt text](/docs/screenshots/calendar-week.png)
 
 Calendario - Vista Día
 Calendario Día
 
-![alt text](image-2.png)
+![alt text](/docs/screenshots/calendar-day.png)
 
 DatePicker
 DatePicker
 
-![alt text](image-3.png)
+![alt text](/docs/screenshots/datepicker.png)
 
 DateRangePicker
 DateRangePicker
 
-![alt text](image-4.png)
+![alt text](/docs/screenshots/daterange-picker.png)
 
 🎨 Características
 ⚡ Angular 21 Signals
