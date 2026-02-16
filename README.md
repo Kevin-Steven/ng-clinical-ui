@@ -1,6 +1,4 @@
 # 🏥 ng-med-ui
-![alt](https://raw.githubusercontent.com/Kevin-Steven/ng-clinical-ui/main/docs/screenshots/calendar-month.png)
-![alt text](./docs/screenshots/calendar-day.png)
 
 > Componentes Angular para sistemas de salud en Ecuador
 
@@ -20,6 +18,33 @@ Componentes UI modernos para agendamiento de citas y gestión clínica. Conforme
 
 ---
 
+## Screenshots
+
+![alt text](/docs/screenshots/calendar-month.png)
+
+Calendario - Vista Semana
+Calendario Semana
+
+![alt text](/docs/screenshots/calendar-week.png)
+
+Calendario - Vista Día
+Calendario Día
+
+![alt text](/docs/screenshots/calendar-day.png)
+
+DatePicker
+DatePicker
+
+![alt text](/docs/screenshots/datepicker.png)
+
+DateRangePicker
+DateRangePicker
+
+![alt text](/docs/screenshots/daterange-picker.png)
+
+---
+
+
 ## 📦 Instalación
 
 ```bash
@@ -37,32 +62,6 @@ import { CalendarMonth, UiDatePicker, UiDateRangePicker } from 'ng-med-ui';
   `
 })
 export class MiComponente {}
-📸 Screenshots
-Calendario - Vista Mes
-Calendario Mes
-
-![alt](https://raw.githubusercontent.com/Kevin-Steven/ng-clinical-ui/main/docs/screenshots/calendar-month.png)
-
-
-Calendario - Vista Semana
-Calendario Semana
-
-![alt text](./docs/screenshots/calendar-week.png)
-
-Calendario - Vista Día
-Calendario Día
-
-![alt text](./docs/screenshots/calendar-day.png)
-
-DatePicker
-DatePicker
-
-![image alt](./docs/screenshots/datepicker.png)
-
-DateRangePicker
-DateRangePicker
-
-![image alt](docs/screenshots/daterange-picker.png)
 
 🎨 Características
 ⚡ Angular 21 Signals
