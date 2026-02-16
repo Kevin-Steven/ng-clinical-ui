@@ -1,5 +1,6 @@
 # 🏥 ng-med-ui
 ![alt](https://raw.githubusercontent.com/Kevin-Steven/ng-clinical-ui/main/docs/screenshots/calendar-month.png)
+![alt text](./docs/screenshots/calendar-day.png)
 
 > Componentes Angular para sistemas de salud en Ecuador
 
