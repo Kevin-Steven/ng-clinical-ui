@@ -1,0 +1,93 @@
+<div class="flex flex-col h-full shadow-theme-sm rounded-xl overflow-hidden bg-white dark:bg-gray-dark">
+
+  <!-- Cabecera de días (L, M, X...) -->
+  <div class="grid grid-cols-7 gap-px border-b border-gray-200 dark:border-gray-800 bg-gray-200 dark:bg-gray-800 text-center text-xs font-semibold leading-6 text-gray-500 dark:text-gray-400 flex-none">
+    @for (dayName of weekDays; track $index) {
+      <div class="bg-white dark:bg-gray-dark py-2 uppercase">
+        <!-- En mobile mostramos solo la primera letra (L), en desktop todo (Lun) -->
+        <span class="lg:hidden">{{ dayName.charAt(0) }}</span>
+        <span class="hidden lg:inline">{{ dayName }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Contenedor del Grid -->
+  <div class="flex bg-gray-200 dark:bg-gray-800 text-xs leading-6 text-gray-700 dark:text-gray-300 flex-auto">
+
+    <!-- Grid Principal: Ahora visible en mobile (w-full grid) -->
+    <div class="w-full grid grid-cols-7 gap-px bg-gray-200 dark:bg-gray-800">
+
+      @for (day of days(); track $index) {
+        <div
+          [class]="day.isCurrentMonth ? 'bg-white dark:bg-gray-dark' : 'bg-gray-50 dark:bg-gray-950 text-gray-400 dark:text-gray-600'"
+          class="relative flex flex-col px-1 py-2 lg:p-3 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors cursor-pointer min-h-[80px] lg:min-h-[120px]"
+          (click)="selectDay(day)">
+
+          <!-- Número del día -->
+          <time
+            [attr.datetime]="day.isoDate"
+            [class.flex]="day.isToday"
+            [class.h-6]="day.isToday"
+            [class.w-6]="day.isToday"
+            [class.items-center]="day.isToday"
+            [class.justify-center]="day.isToday"
+            [class.rounded-full]="day.isToday"
+            [class.bg-brand-500]="day.isToday"
+            [class.font-semibold]="day.isToday"
+            [class.text-white]="day.isToday"
+            class="ml-auto lg:ml-0 font-medium text-gray-900 dark:text-gray-300">
+            {{ day.dayNumber }}
+          </time>
+
+          <!-- SECCIÓN EVENTOS -->
+          @if (day.events && day.events.length > 0) {
+
+            <!-- VISTA MOBILE: Puntos indicadores (Solo visible < lg) -->
+            <div class="mt-auto flex flex-wrap gap-1 lg:hidden">
+              @for (event of day.events.slice(0, 4); track event.id) {
+                 <span
+                   [class]="
+                    event.color === 'brand' ? 'bg-brand-500' :
+                    event.color === 'success' ? 'bg-success-500' :
+                    event.color === 'error' ? 'bg-error-500' :
+                    event.color === 'warning' ? 'bg-warning-500' :
+                    'bg-gray-400'"
+                   class="h-1.5 w-1.5 rounded-full"></span>
+              }
+            </div>
+
+            <!-- VISTA DESKTOP: Lista detallada (Solo visible >= lg) -->
+            <ol class="hidden lg:block mt-2 space-y-1">
+              @for (event of day.events; track event.id) {
+                <li>
+                  <a
+                    href="#"
+                    class="group flex flex-col rounded-lg p-2 text-xs hover:bg-gray-100 dark:hover:bg-white/5 transition-colors border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
+                    (click)="$event.preventDefault()">
+
+                    <p class="font-semibold text-gray-900 dark:text-white/90 truncate">
+                      {{ event.title }}
+                    </p>
+
+                    <time
+                      [attr.datetime]="event.start.toISOString()"
+                      [class]="
+                        event.color === 'brand' ? 'bg-brand-50 text-brand-600 dark:bg-brand-500/20 dark:text-brand-400' :
+                        event.color === 'success' ? 'bg-success-50 text-success-600 dark:bg-success-500/20 dark:text-success-400' :
+                        event.color === 'error' ? 'bg-error-50 text-error-600 dark:bg-error-500/20 dark:text-error-400' :
+                        event.color === 'warning' ? 'bg-warning-50 text-warning-600 dark:bg-warning-500/20 dark:text-warning-400' :
+                        'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
+                      "
+                      class="ml-auto inline-block rounded px-1.5 py-0.5 text-[10px] font-medium mt-1">
+                      {{ event.time }}
+                    </time>
+                  </a>
+                </li>
+              }
+            </ol>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

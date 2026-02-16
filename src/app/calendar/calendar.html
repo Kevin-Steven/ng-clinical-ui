@@ -1,0 +1,145 @@
+<div
+  class="flex h-full flex-col bg-white dark:bg-gray-dark rounded-xl overflow-hidden shadow-theme-sm border border-gray-300 dark:border-gray-800">
+
+  <!-- CABECERA SUPERIOR GLOBAL -->
+  <header
+    class="flex flex-none flex-col gap-4 border-b border-gray-300 dark:border-gray-800 px-6 py-4 md:flex-row md:items-center md:justify-between bg-white dark:bg-gray-dark">
+
+    <!-- SECCIÓN IZQUIERDA: Título y Navegación -->
+    <div class="flex items-center gap-4">
+
+      <!-- Título del Calendario -->
+      <h1 class="min-w-[150px] text-theme-xl font-semibold leading-6 text-gray-900 dark:text-white">
+
+        @if (view() === 'day') {
+        <!-- VISTA DÍA -->
+        <time [attr.datetime]="currentDate() | date:'yyyy-MM-dd'" class="flex flex-wrap items-center gap-2 sm:gap-3">
+
+          <!-- Fecha completa (ej. 16 de febrero de 2026) -->
+          <!-- Usamos la señal computada que creamos con Intl -->
+          <span class="capitalize">{{ currentFullDate() }}</span>
+
+          <!-- Separador visual -->
+          <span class="hidden text-gray-300 dark:text-gray-600 sm:inline">|</span>
+
+          <!-- Nombre del día (ej. Lunes) -->
+          <!-- Usamos la señal computada que creamos con Intl -->
+          <span class="text-gray-500 dark:text-gray-400 font-medium capitalize">
+            {{ currentDayName() }}
+          </span>
+
+        </time>
+        } @else {
+        <!-- VISTA MES/SEMANA -->
+        <time [attr.datetime]="currentDate() | date:'yyyy-MM'">
+          {{ currentMonthName() | titlecase }}
+        </time>
+        }
+
+      </h1>
+
+
+
+      <!-- Controles de Navegación (< Hoy >) -->
+      <div
+        class="flex items-center rounded-lg bg-white dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700">
+
+        <!-- Anterior -->
+        <button type="button" (click)="navigate('prev')"
+          class="flex h-9 w-9 items-center justify-center rounded-l-lg border-r border-gray-300 dark:border-gray-700 text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-500 dark:hover:text-gray-300 focus:relative transition-colors">
+          <span class="sr-only">Anterior</span>
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M12.79 5.23a.75.75 0 01-.02 1.06L8.06 10l3.72 3.72a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 0z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <!-- Botón Hoy -->
+        <button type="button" (click)="goToToday()"
+          class="hidden px-3.5 text-theme-sm font-semibold text-gray-900 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 focus:relative md:block transition-colors h-9">
+          Hoy
+        </button>
+
+        <!-- Siguiente -->
+        <button type="button" (click)="navigate('next')"
+          class="flex h-9 w-9 items-center justify-center rounded-r-lg border-l border-gray-300 dark:border-gray-700 text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-500 dark:hover:text-gray-300 focus:relative transition-colors">
+          <span class="sr-only">Siguiente</span>
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M7.21 14.77a.75.75 0 01.02-1.06L11.94 10 7.23 6.29a.75.75 0 011.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DERECHA: Selector de Vistas y Acciones -->
+    <div class="flex items-center gap-4 md:ml-auto">
+
+      <!-- Selector de Vistas (Mes / Semana / Día) -->
+      <div
+        class="hidden items-center rounded-lg bg-white dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 md:flex">
+
+        <button type="button" (click)="changeView('month')" [class]="view() === 'month'
+            ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
+            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5'"
+          class="relative inline-flex items-center rounded-l-lg px-3 py-2 text-theme-sm font-semibold focus:z-10 transition-colors border-r border-gray-300 dark:border-gray-700">
+          Mes
+        </button>
+
+        <button type="button" (click)="changeView('week')" [class]="view() === 'week'
+            ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
+            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5'"
+          class="relative -ml-px inline-flex items-center px-3 py-2 text-theme-sm font-semibold focus:z-10 transition-colors border-r border-gray-300 dark:border-gray-700">
+          Semana
+        </button>
+
+        <button type="button" (click)="changeView('day')" [class]="view() === 'day'
+            ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
+            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5'"
+          class="relative -ml-px inline-flex items-center rounded-r-lg px-3 py-2 text-theme-sm font-semibold focus:z-10 transition-colors">
+          Día
+        </button>
+
+      </div>
+
+      <!-- Separador Vertical -->
+      <div class="hidden h-6 w-px bg-gray-300 dark:bg-gray-700 md:block"></div>
+
+      <!-- Botón Nuevo Evento -->
+      <button type="button"
+        class="inline-flex items-center justify-center rounded-lg bg-brand-500 px-4 py-2 text-theme-sm font-semibold text-white shadow-theme-sm hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 transition-colors dark:bg-brand-500 dark:hover:bg-brand-400">
+        Nuevo Evento
+      </button>
+
+      <!-- Menú Mobile (3 puntos) -->
+      <div class="relative md:hidden">
+        <button type="button"
+          class="-m-2.5 flex items-center p-2.5 text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300">
+          <span class="sr-only">Abrir menú</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CUERPO PRINCIPAL -->
+  <div class="flex flex-auto overflow-hidden bg-white dark:bg-gray-dark">
+    @switch (view()) {
+    @case ('month') {
+    <app-calendar-month class="flex w-full flex-auto flex-col" />
+    }
+    @case ('week') {
+    <app-week-view class="flex w-full flex-auto flex-col" />
+    }
+    @case ('day') {
+    <app-day-view class="flex w-full flex-auto flex-col" />
+    }
+    }
+  </div>
+</div>

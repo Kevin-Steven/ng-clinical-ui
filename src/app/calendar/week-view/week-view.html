@@ -1,0 +1,114 @@
+<!-- Agregamos min-h-0 al contenedor flex-col para activar el scroll -->
+<div class="flex flex-col h-full min-h-0">
+
+  <!-- CUERPO DEL CALENDARIO -->
+  <!-- Quitamos max-h fijo y usamos flex-auto con min-h-0 nuevamente -->
+  <div
+    class="isolate flex flex-auto flex-col overflow-hidden bg-white dark:bg-gray-dark rounded-xl shadow-theme-sm border border-gray-200 dark:border-gray-800 min-h-0">
+
+    <!-- Header Sticky -->
+    <div class="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full">
+      <div
+        class="sticky top-0 z-30 flex-none bg-white dark:bg-gray-dark shadow-theme-sm ring-1 ring-black/5 dark:ring-white/10">
+
+        <!-- Vista móvil: agregamos columna gutter -->
+        <div
+          class="grid grid-cols-[repeat(7,1fr)_0.5rem] text-theme-sm leading-6 text-gray-500 dark:text-gray-400 sm:hidden">
+          @for (day of weekDays(); track day.dayNumber) {
+          <div class="flex flex-col items-center pb-3 pt-2 border-b border-gray-100 dark:border-gray-800">
+            <span class="text-xs uppercase font-medium text-gray-500 dark:text-gray-400">
+              {{ day.dayName | slice:0:1 }}
+            </span>
+            <span [class]="day.isToday ? 'bg-brand-500 text-white shadow-theme-xs' : 'text-gray-900 dark:text-white/90'"
+              class="mt-1 flex h-8 w-8 items-center justify-center rounded-full font-semibold text-theme-sm">
+              {{ day.dayNumber }}
+            </span>
+          </div>
+          }
+
+          <!-- COLUMNA GUTTER móvil: compensa scrollbar -->
+          <div class="bg-white dark:bg-gray-dark border-b border-gray-100 dark:border-gray-800"></div>
+        </div>
+
+        <!-- Vista desktop -->
+        <div
+          class="hidden sm:grid grid-cols-[3.5rem_repeat(7,1fr)_0.5rem] divide-x divide-gray-200 dark:divide-gray-800 text-theme-sm text-gray-500 dark:text-gray-400">
+          <!-- Columna hora vacía -->
+          <div class="w-14 bg-white dark:bg-gray-dark border-b border-gray-200 dark:border-gray-800"></div>
+
+          <!-- 7 días -->
+          @for (day of weekDays(); track day.dayNumber) {
+          <div
+            class="flex items-center justify-center py-3 bg-white dark:bg-gray-dark min-w-0 border-b border-gray-200 dark:border-gray-800">
+            <span class="flex items-center gap-x-2">
+              <span class="font-medium text-gray-500 dark:text-gray-400 uppercase text-theme-xs leading-none mt-0.5">
+                {{ day.dayName }}
+              </span>
+              <span
+                [class]="day.isToday ? 'bg-brand-500 text-white shadow-theme-xs' : 'text-gray-900 dark:text-white/90'"
+                class="flex h-8 w-8 items-center justify-center rounded-full font-semibold text-theme-sm">
+                {{ day.dayNumber }}
+              </span>
+            </span>
+          </div>
+          }
+
+          <!-- COLUMNA GUTTER desktop: compensa scrollbar -->
+          <div class="bg-white dark:bg-gray-dark border-b border-gray-200 dark:border-gray-800"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ÁREA SCROLLABLE (Corrección Crítica) -->
+    <!-- flex-auto + overflow-y-auto es lo que permite el scroll -->
+    <div class="flex flex-auto overflow-y-auto custom-scrollbar">
+
+      <!-- ... Resto del contenido del grid (horas y eventos) igual que antes ... -->
+      <div
+        class="sticky left-0 z-10 w-14 flex-none bg-white dark:bg-gray-dark ring-1 ring-gray-100 dark:ring-gray-800 border-r border-gray-200 dark:border-gray-800">
+      </div>
+      <div class="grid flex-auto grid-cols-1 grid-rows-1">
+        <div class="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-200 dark:divide-gray-800"
+          [style]="'grid-template-rows: repeat(24, minmax(3.5rem, 1fr))'">
+          <div class="row-end-1 h-7"></div>
+          @for (hour of hours; track hour) {
+          <div>
+            <div
+              class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-theme-xs leading-5 text-gray-400 dark:text-gray-500 font-medium">
+              {{ hour === 0 ? '12AM' : (hour > 12 ? (hour - 12) + 'PM' : hour + (hour === 12 ? 'PM' : 'AM')) }}
+            </div>
+          </div>
+          }
+        </div>
+        <ol
+          class="col-start-1 col-end-2 row-start-1 grid grid-cols-7 grid-rows-1 divide-x divide-gray-200 dark:divide-gray-800 sm:grid-cols-7"
+          [style]="'grid-template-rows: repeat(288, minmax(0, 1fr))'">
+          <div class="col-start-1 row-span-full"></div>
+          <div class="col-start-2 row-span-full"></div>
+          <div class="col-start-3 row-span-full"></div>
+          <div class="col-start-4 row-span-full"></div>
+          <div class="col-start-5 row-span-full"></div>
+          <div class="col-start-6 row-span-full"></div>
+          <div class="col-start-7 row-span-full"></div>
+          @for (event of processedEvents(); track event.id) {
+          <li class="relative mt-px flex" [style.grid-column-start]="event.gridColumn"
+            [style.grid-row]="event.gridRowStart + ' / span ' + event.gridRowSpan">
+            <a href="#" (click)="$event.preventDefault()"
+              [class]="event.color === 'brand' ? 'bg-brand-50 text-brand-700 hover:bg-brand-100 dark:bg-brand-500/20 dark:text-brand-400 dark:hover:bg-brand-500/30' : event.color === 'success' ? 'bg-success-50 text-success-700 hover:bg-success-100 dark:bg-success-500/20 dark:text-success-400 dark:hover:bg-success-500/30' : event.color === 'error' ? 'bg-error-50 text-error-700 hover:bg-error-100 dark:bg-error-500/20 dark:text-error-400 dark:hover:bg-error-500/30' : event.color === 'warning' ? 'bg-warning-50 text-warning-700 hover:bg-warning-100 dark:bg-warning-500/20 dark:text-warning-400 dark:hover:bg-warning-500/30' : 'bg-gray-50 text-gray-700 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'"
+              class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg p-2 text-theme-xs leading-5 shadow-theme-sm ring-1 ring-black/5 dark:ring-white/10 transition-all duration-200 border-l-4"
+              [class.border-l-brand-500]="event.color === 'brand'"
+              [class.border-l-success-500]="event.color === 'success'"
+              [class.border-l-error-500]="event.color === 'error'"
+              [class.border-l-warning-500]="event.color === 'warning'">
+              <p class="order-1 font-semibold truncate">{{ event.title }}</p>
+              <p class="text-theme-xs opacity-90 group-hover:opacity-100 transition-opacity"><time
+                  [attr.datetime]="event.start.toISOString()">{{ event.start | date:'shortTime' }}</time></p>
+            </a>
+          </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
